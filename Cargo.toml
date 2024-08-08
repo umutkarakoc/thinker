@@ -1,0 +1,41 @@
+[package]
+name = "thinker"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+serde={version = "*", features = ["derive",]}
+serde_json = {version = "*", features = ["raw_value"]}
+once_cell = "*"
+reqwest = {version = "*", features = ["serde_json", "json"]}
+axum={version ="*", features = ["headers"]}
+axum-server = { version = "*", features = ["tls-rustls"] }
+tower = { version = "*", features = ["util"] }
+tower-http = { version = "*", features = ["fs", "trace", "cors"] }
+tokio = {version = "*", features=["full"]}
+hyper = {version = "*", features=["full"]}
+hyper-native-tls = "*"
+hyper-openssl = "*"
+sqlx = {version = "*", features = ["runtime-tokio-rustls", "json", "uuid", "postgres", "chrono", "macros", "default"]}
+dotenv = "*"
+config = "*"
+fomat-macros = "*"
+uuid = {version = "*", features = ["serde", "v4"]}
+sailfish = "*"
+bcrypt = "*"
+chrono = {version = "*", features = ["serde"]}
+async-session = "*"
+regex = "*"
+chrono-humanize="*"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[profile.release]
+opt-level = 3
+strip = true
+debug = false
+codegen-units = 1
+lto = true

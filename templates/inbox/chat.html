@@ -1,0 +1,97 @@
+<div id="chat" class="is-flex box is-radiusless is-shadowless p-0
+		is-flex-direction-column m-0 has-background-info-light " style="flex: 3; z-index: 10;">
+		<article class="media box is-radiusless is-shadowless has-background-link-light" style="cursor: pointer;" hx-trigger="none"
+		 hx-target="#chat" hx-swap="outerHTML">
+			<figure class="media-left">
+				<p class="image is-48x48">
+					<img src="https://avatars.dicebear.com/api/identicon/<%=contact_id%>.svg" />
+				</p>
+			</figure>
+			<div class="media-content">
+				<div class="content">
+					<p>
+						<strong><%=name%></strong> 
+						<br/>
+						<small><%=ext_id%></small> 
+					</p>
+				</div>
+			</div>
+			<div class="media-right">
+				<div class="select has-background-link-light" >
+				  <select  class="has-background-link-light"
+				  	name="flow_id" hx-post="/app/inbox/chat/<%=contact_id%>/flow" hx-swap="none">
+				    <option value="" <%- if flow.is_none() {"selected"} else { "" } %> > 
+				    	Assign to</option>
+				    <% for f in flows { %>
+				    	<option value="<%=f.id.to_string()%>"  
+				    		<%- flow.as_ref().map_or("", |(id,_name)| { if *id == f.id {"selected"} else {""} }) %> >
+				    		<%=f.name%>
+				    	</option>
+				    <% } %>
+				  </select>
+				</div>
+			 </div>
+
+		</article>
+
+	<div style="flex: 1 1 0; min-height: 0;" >
+		<div style="height: 100%; overflow-y: scroll; display: flex;flex-direction: column-reverse;">
+		<div class="is-flex is-flex-direction-column-reverse m-0 is-justify-content-flex-end p-4">
+		 <%- message_list_render %>
+		</div>
+		</div>
+	</div>
+
+	<form id="send_message" hx-target="#chat"
+		 class="rounded-1 m-0 p-4 box is-radiusless is-shadowless has-background-link-light">
+		<textarea id="message" autofocus="true" name="text" placeholder="Type your message" class="input" form="send_message"
+			style="min-height: 100px; max-height: 300px; resize: none"
+			oninput="this.style.height = '5px'; this.style.height = (this.scrollHeight)+'px';"
+			onkeypress="if(event.which === 13 && !event.shiftKey) { event.preventDefault(); document.getElementById('text_submit').click() } "
+		></textarea>
+		<div style="display: flex; justify-content: space-between; margin-top: 10px">
+			<div class="flex-1">
+				<!-- <span
+					class="icon p-1 ml-2"
+					style="font-size: 22px">
+					<i class="fas fa-comment-dots" aria-hidden="true"></i>
+				</span> -->
+				<label for="file_upload">
+					<span class="icon p-1 ml-2" style="font-size: 22px">
+						<i class="fas fa-file-upload" aria-hidden="true"></i>
+					</span>
+				</label>
+				<!-- <input type="file" id="file_upload" hidden="" /> -->
+				<!-- <span
+					class="icon p-1 ml-2"
+					style="font-size: 22px">
+					<i class="fas fa-smile-beam" aria-hidden="true"> </i>
+				</span>
+				<span
+					id="send_action"
+					class="icon p-1 ml-2"
+					@click=${send_action}
+					style="font-size: 22px">
+					<i class="fas fa-check-circle" aria-hidden="true"></i>
+				</span>
+				<span
+					id="send_action"
+					class="icon p-1 ml-2"
+					@click=${send_action_image}
+					style="font-size: 22px">
+					<i class="fas fa-check-circle" aria-hidden="true"></i>
+				</span> -->
+			</div>
+			<div>
+				<button type="submit" class="button is-primary" id="text_submit"
+					hx-post="/app/inbox/chat/<%=contact_id%>/text">
+					<span class="icon">
+						<i class="far fa-paper-plane" aria-hidden="true"> </i>
+					</span>
+					<span>Send</span>
+				</button>
+			</div>
+		</div>
+	</form>
+
+</div>

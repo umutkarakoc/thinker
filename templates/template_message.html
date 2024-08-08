@@ -1,0 +1,28 @@
+
+
+<div class="p-6 is-flex is-flex-direction-column " style="flex: 1">
+	<h3 class="title is-size-4">Template Messages</h3>
+	<table class="table is-fullwidth" >
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Created at</th>
+				<th>Type</th>
+				<th>Contact</th>
+				<th>Message</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% for c in channel_list.iter() { %>
+			<tr>
+				<th><%= c.1 %></th>
+				<th><%= c.2 %></th>
+				<th><%= c.3 %></th>
+				<th><%= c.4 %></th>
+				<th><%= c.5 %></th>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

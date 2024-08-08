@@ -1,0 +1,74 @@
+<div class="ask-question" id="t_<%= id %>">
+
+  <article style="margin-bottom: 0">
+    <header>
+      <i class="fa-solid fa-code-fork"></i>
+      Ask Question
+    </header>
+
+    <main>
+      <form hx-post="/send_message/<%=id%>" id="form_<%= id %>" hx-preserve="true" hx-swap="none">
+        <textarea name="content" form="form_<%= id %>" placeholder="Write your question"></textarea>
+
+      </form>
+    </main>
+  </article>
+
+  <div class="line"></div>
+  <div>
+    <div style="display: flex; padding: 16px !important; padding-top: 0 !important; padding-bottom: 0 !important;">
+      <% for (i, branch) in branches.iter().enumerate() { %>
+        <div class="branch">
+          <% if i> 0 { %>
+            <div class="connect right "></div>
+            <% } %>
+
+              <% if i < branches.len() - 1 { %>
+                <div class="connect left "></div>
+                <% } %>
+
+                  <div class="line"></div>
+                  <article>
+                    <header>
+                      If user reply match to
+                    </header>
+                    <main>
+                      <form hx-post="/ask_question_reply/<%= branch.id.to_string() %>" hx-swap="none">
+                        <label for="text">
+                          <input id="text" type="text" name="text" value="<%= branch.text %>" />
+                        </label>
+
+                        <label for="contains">
+                          <input type="checkbox" id="contains" name="contains" checked="<%= branch.contains %>">
+                          Contains
+                        </label>
+
+                        <label for="fuzzy">
+                          <input type="checkbox" id="fuzzy" name="fuzzy" checked="<%= branch.fuzzy %>">
+                          Fuzzy match
+                        </label>
+
+                      </form>
+                    </main>
+                  </article>
+                  <div class="step" id="step_<%= branch.next_step_id.to_string() %>"
+                    hx-get="/step/<%= branch.next_step_id.to_string() %>" hx-trigger="load" hx-swap="outerHTML"
+                    hx-target="#step_<%= branch.next_step_id.to_string() %>"></div>
+
+
+            <div class="connect-bottom">
+            <% if i> 0 { %>
+              <div class="connect-line"></div>
+              <div class="connect right "></div>
+              <% } %>
+    
+            <% if i < branches.len() - 1 { %>
+              <div class="connect-line"></div>
+              <div class="connect left "></div>
+              <% } %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+</div>

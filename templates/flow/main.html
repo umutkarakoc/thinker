@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thinker</title>
+  <script src="https://kit.fontawesome.com/c018f1996d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+  <link rel="stylesheet" href="/flow/style.css">
+
+</head>
+
+<body>
+  <div style="display: flex;">
+    <article class="sidepanel" style="width: 240px;">
+      <header>
+        <%= name %>
+      </header>
+      <main>
+        <main class="step_empty">
+          <button class="action" type="submit" draggable="true"  name="t" value="send_message"
+            ondragstart="action_drag(event)">
+            Send message
+          </button>
+
+          <button class="action" type="submit" draggable="true" name="t" value="wait_for_reply"
+          ondragstart="action_drag(event)">
+            Wait for reply
+          </button>
+        </main>
+      </main>
+    </article>
+    <div class="flow-container" id="container">
+      <div id="canvas" style="position: absolute;"></div>
+      <div style="width: calc(50vw - 300px)"></div>
+      <div class="flow" id="flow" style="visibility: hidden;" 
+        ondrop="drop(event)" ondragover="allow_drop(event)" ondrag="drag(event)" >
+          <article id="step_start"
+            style="width: 100px; height: 100px; min-height: 100px; 
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px;border-radius: 50%; position: absolute;
+            flex-direction: column
+          ">
+          Start
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cash/8.1.2/cash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js" integrity="sha512-I+rKw3hArzZIHzrkdELbKqrXfkSvw/h0lW/GgB8FThaBVz2e5ZUlSW8kY8v3q6wq37eybIwyufkEZxe4qSlGcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  let scroll_pos = {left:0, top:0, x:0, y:0};
+  let flow_id = '<%=id%>';
+  let editor_data = JSON.parse(`<%-data%>`);
+
+  // $("#step_start")
+</script>
+<script src="/flow/api.js"></script>
+<script src="/flow/container.js"></script>
+<script src="/flow/send_message.js"></script>
+<script src="/flow/wait_for_reply.js"></script>
+<script src="/flow/render_step.js"></script>
+<script src="/flow/drag.js"></script>
+<script src="/flow/index.js"></script>
+
+</body>
+
+</html>

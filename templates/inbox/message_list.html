@@ -1,0 +1,44 @@
+<% for msg in message_list { %>
+	<div class="mt-2" style="min-width: 200px; display: flex; 
+flex-direction: <%= if msg.created_by == "contact" {"row" } else { "row-reverse" } %>" >
+
+		<div class="box message p-2 is-flex" style="min-width: 180px; display: flex; flex-direction: column; 
+			align-items: <%= if msg.created_by == "contact" {"flex-start" } else { "flex-end" } %>>
+
+			<!-- ${msg.reply_for ? render_content(msg.reply, true) : ""} -->
+			<% if let crate::models::MessageType::Media(media) = &msg.t { %>
+			<% if media.media_type == "image" { %>
+				<img src="<%= media.url %>" height="100%" width="100%" style="object-fit: contain; height: 200px;" />
+			<% } %>
+
+			<% if media.media_type == "video" { %>
+				<video src="<%= media.url %>"  controls style="height: 100%; width: 100%" />
+			<% } %>
+
+			<% if media.media_type == "audio" || media.media_type == "voice" { %>
+				<video src="<%= media.url %>"  />
+			<% } %>
+
+			<% if media.media_type == "document" { %>
+				<a href="<%= media.url %>">
+				<span class="icon"><i class="fas fa-file text-black text-lg" ></i></span>
+					download
+				</a>
+			<% } } %>
+
+			<% if let crate::models::MessageType::Text(text) = &msg.t { %>
+				<%= text %>
+			<% } %>
+
+			<div class="subtitle" style="font-size: 12px; height: 30px;">
+				<span class="icon is-left icon <%= msg.status %>">
+					<i class="text-teal-500 fas " aria-hidden="true"></i>
+				</span>
+				<span>
+					<%= chrono_humanize::HumanTime::from(msg.created_at).to_string() %>
+				</span>
+			</div>
+
+		</div>
+	</div>	
+	<% } %>	

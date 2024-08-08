@@ -1,0 +1,46 @@
+<div>
+
+  <div style="display: flex; justify-content: space-between;">
+    <h4 class="title">
+      Edit <%= user.name %>
+    </h4>
+    <div>
+      
+    </div>
+  </div>
+  <div class="pt-4" style="display: flex; justify-content: center;">
+    <form style="width: 400px;" class="card p-4" method="post" action="/admin/user/add">
+      <input type="hidden" value="<%= user.id.to_string() %>" />
+      <div class=" mt-4 field">
+        <label class="label" for="password">Name</label>
+        <div class="control has-icons-right">
+          <input id="email" class="input" type="text" name="name" placeholder="Name" value="<%= user.name %>" />
+          <span class="icon is-small is-right">
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class=" mt-4 field">
+        <label class="label" for="password">Email</label>
+        <div class="control has-icons-right">
+          <input id="email" class="input" type="text" name="email" placeholder="Email" value="<%= user.email %>" />
+          <span class="icon is-small is-right">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <a class="button is-black is-outlined" hx-target="body" hx-get="/admin/user" hx-push-url="true" >Cancel</a>
+
+        <button type="submit" class="button is-primary">Save</button>
+      </div>
+
+      <div class="mt-1 has-text-danger">
+        <%= error %>
+      </div>
+
+    </form>
+  </div>
+</div>

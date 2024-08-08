@@ -1,0 +1,27 @@
+<article style="max-width: 400px; width: 100%;">
+  <h3 class="up"> Login to Thinker Admin</h3>
+  <form hx-target="body" hx-post="/admin/login">
+      <div class="input">
+        <label for="email"></label>
+        <i class="fa-solid fa-envelope"></i>
+        <input name="email" type="email" required placeholder="email" value="<%= email %>" />
+      </div>
+
+      <div class="password">
+        <label for="password"></label>
+        <i class="fa-solid fa-envelope"></i>
+        <input name="password" type="password" required placeholder="password" value="<%= password %>" />
+      </div>
+  
+      <button class="" hx-indicator="button">
+        <span class="content">Login</span>
+        <span class="loader"></span>
+      </button>
+  
+      <div style="height: 40px; margin-top: 10px">
+        <span class="has-text-danger">
+          <%= error %>
+        </span>
+      </div>
+  </form>
+</article>

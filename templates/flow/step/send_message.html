@@ -1,0 +1,16 @@
+<article class="" id="t_<%= id %>">
+  <header>
+    <i class="fa-solid fa-paper-plane"></i>
+    Send Message
+  </header>
+  <main>
+    <form
+      hx-post="/send_message/<%=id%>"
+      id="form_<%= id %>"
+      hx-preserve="true"
+      hx-swap="none"
+    >
+      <textarea name="content" form="form_<%= id %>"><%= content %></textarea>
+    </form>
+  </main>
+</article>

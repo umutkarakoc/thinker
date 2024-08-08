@@ -1,0 +1,26 @@
+<div style="width: 340px;" class="box is-radiusless m-0 p-0" id="contact_list">
+		<% for c in contact_list { %>
+			<article class="media p-4 m-0
+				<%= if Some(c.id) == selected {"has-background-primary-light"} else {""}  %>" 
+				style="cursor: pointer;" 
+				hx-get="/app/inbox/<%=c.id.to_string()%>" 
+				hx-target="body" hx-swap="outerHTML" hx-push-url="true">
+				<figure class="media-left">
+					<p class="image is-32x32">
+						<img src="https://avatars.dicebear.com/api/identicon/<%=c.id.to_string()%>.svg" />
+					</p>
+				</figure>
+				<div class="media-content">
+					<div class="content">
+						<div class="is-flex is-justify-content-space-between is-size-6">
+							<strong><%=c.name%></strong> 
+							<small c><%= chrono_humanize::HumanTime::from(c.last_message_at).to_string() %></small>
+						</div>
+						<p class="p-0 m-0 is-size-7">
+							<%= c.text.unwrap_or("sent a media".to_string()) %>
+						</p>
+					</div>
+				</div>
+			</article>
+		<% } %>
+	</div>

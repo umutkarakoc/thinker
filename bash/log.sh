@@ -1,0 +1,1 @@
+sudo journalctl --unit=thinker -n 100 --no-pager -f

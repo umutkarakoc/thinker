@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helorobo</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://kit.fontawesome.com/c018f1996d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <script>
+        window.addEventListener("load", function() {
+
+            htmx.on("htmx:confirm", function(evt) {
+
+                evt.preventDefault();
+                evt.stopPropagation();
+
+                let content = evt.target.getElementsByClassName("content")[0];
+                let confirm = evt.target.getElementsByClassName("confirm")[0];
+
+                console.log(evt.target.tagName)
+                if (evt.target.tagName == "BUTTON" && confirm) {
+                    if (confirm.style.display == "inline") {
+                        evt.detail.issueRequest();
+                    } else {
+                        confirm.style.display = "inline";
+                        content.style.display = "none";
+                        setTimeout(function() {
+                            confirm.style.display = "none";
+                            content.style.display = "inline";
+                        }, 6000)
+                    }
+                }
+                else {
+                    evt.detail.issueRequest();
+                }
+            });
+        })
+    </script>
+</head>
+
+<body class="">
+    <div id="app" class="">
+        <nav id="header" class="level box m-0 p-2 is-radiusless ">
+            <img class="logo" src="https://app.helorobo.com//images-css/auth/auth-logo.svg" />
+
+            <div hx-boost="true"  class="center" >
+                <a href="/app/inbox" class="button is-white is-normal 
+                    <%= if active_page == "inbox" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-solid fa-comments"></i></span>
+                    <span>Inbox</span>
+                </a>
+
+                <a href="/app/social" class="button is-white is-normal 
+                    <%= if active_page == "social" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-brands fa-square-instagram"></i></span>
+                    <span>Social Media</span>
+                </a>
+
+                <a href="/app/automotion" class="button is-white is-normal
+                    <%= if active_page == "automotion" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-solid fa-robot"></i></span>
+                    <span>Automotion</span>
+                </a>
+
+                <a href="/app/broadcast" class="button is-white is-normal
+                    <%= if active_page == "broadcast" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-solid fa-tower-broadcast"></i></span>
+                    <span>Broadcast</span>
+                </a>
+
+                <a href="/app/channel" class="button is-white is-normal
+                    <%= if active_page == "channel" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-solid fa-cloud"></i></span>
+                    <span>Channels</span>
+                </a>
+
+                <a href="/app/setting" class="button is-white is-normal
+                    <%= if active_page == "setting" { "is-link is-inverted" } else { "" } %>">
+                    <span class="icon"><i class="fa-solid fa-gear"></i></span>
+                    <span>Settings</span>
+                </a>
+
+            </div>
+
+            <div class="right">
+
+                <button hx-get="/app/profile/notification" class="button is-white ">
+                    <i class="fa-solid icon fa-bell"></i>
+                </button>
+
+                <div class="dropdown is-hoverable">
+                    <div class="dropdown-trigger">
+                        <button hx-get="/app/profile/menu" class="button is-light ">
+                            <span class="icon"><i class="fa-solid icon fa-user"></i></span>
+                            <span>
+                                <%= user.name %>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                        <div class="dropdown-content">
+                            <a href="/profile" class="dropdown-item">
+                                Profile
+                            </a>
+                            <a href="/app/logout" class="dropdown-item button is-danger is-inverted">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div id="page" class="is-flex p-0 box is-radiusless ">
+            <%- page %>
+        </div>
+
+    </div>
+
+
+    <div id="modal"></div>
+</body>
+
+</html>

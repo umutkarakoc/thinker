@@ -1,0 +1,44 @@
+<!-- <article>
+  <header>Select Next Step</header>
+  <form id="step_form_<%= step_id %>" hx-post="/step/<%= step_id %>/type"
+        hx-target="#step_<%= step_id %>" hx-swap="outerHTML" >
+  <main class="step_empty">
+
+    <button class="secondary"
+      type="submit"
+      name="t"
+      value="send_message"
+    >
+      Send message
+    </button>
+
+    <button class="secondary"
+      type="submit"
+      name="t" value="ask_question"
+    >
+      Ask Question
+    </button>
+  </main>
+  </form>
+</article> -->
+
+<!-- <article
+class="start"
+style="
+  width: 100px;
+  height: 100px;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+"
+>
+Next Step
+</article> -->
+
+<button id="step_<%= step_id %>" ondrag="action_drop()"  class="step empty">
+  <i class="fa fa-plus"></i>
+</button>

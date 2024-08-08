@@ -1,0 +1,52 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+#header {
+
+}
+
+#header .logo{
+	height: 40px;
+}
+
+#header .center {
+	margin-left: 100px;
+	flex: 1;
+}
+
+#page {
+	flex: 1;
+}
+
+.icon.created i:before {
+	content: "\f017";
+}
+
+.icon.received {
+	display: none;
+}
+
+
+.icon.send i:before {
+	content: "\f00c";
+}
+
+.icon.read i:before {
+	content: "\f560";
+}
+
+.icon.deleted i:before {
+	content: "\f1f8";
+}
+
+#chat .message {
+	max-width: 80%;
+}

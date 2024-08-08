@@ -1,0 +1,37 @@
+<table class="table" style="width:100%">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Created</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <% for user in users.iter() { %>
+      <tr>
+        <td><abbr title="<%= user.id.to_string() %>">
+            <%= user.id.to_string()[0..4] %>...
+          </abbr></td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </th>
+        <td>
+          <%= user.created_at.format("%H:%M %d/%m/%Y").to_string() %>
+        </td>
+        <td>
+          <a class="button is-link is-inverted" hx-target="body" hx-get="/admin/user/<%= user.id.to_string() %>" hx-push-url="true">
+            <span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>
+          </a>
+        </td>
+      </tr>
+      <%}%>
+
+  </tfoot>
+  <tbody>
+  </tbody>
+</table>

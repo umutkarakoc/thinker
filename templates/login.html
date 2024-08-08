@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="/icon.png" type="image/x-icon" />
+  <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+  <script src="https://kit.fontawesome.com/c018f1996d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+  <div style="width: 100vw; height: 100vh; display: flex; justify-content: center;
+    align-items: stretch; flex-direction: row">
+    <div style="max-width: 600px; padding: 40px; z-index: 100; display: flex; flex-direction: row;
+      justify-content: center; align-items: center;">
+
+
+      <div class="card p-4" style="max-width: 450px; min-width: 400px; width: 100%;">
+        <h3 class="title is-size-4"> Login to Thinker </h3>
+        <form hx-post="/app/login" hx-target="#error">
+          <div class="field">
+            <label for="email"></label>
+            <div class="control has-icons-left">
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <input id="email" name="email" type="email" required placeholder="email" value="" class="input" />
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label for="password"></label>
+            <div class="control has-icons-left">
+              <span class="icon"><i class="fa-solid fa-key"></i></span>
+              <input id="password" name="password" type="password" required placeholder="password" value=""
+                class="input" />
+            </div>
+          </div>
+
+          <button type="submit" class="button is-primary">Login</button>
+
+          <div style="height: 40px; margin-top: 10px">
+            <span class="has-text-danger" id="error">
+            </span>
+          </div>
+        </form>
+      </div>
+</body>
+
+</html>
